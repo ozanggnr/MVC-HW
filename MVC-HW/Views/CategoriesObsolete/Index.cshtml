@@ -1,0 +1,50 @@
+@model List<APP.Models.CategoryResponse>
+
+<h2>Categories</h2>
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>
+    <a asp-controller="Footballers" asp-action="Index" class="btn btn-secondary">Footballers</a>
+    <a asp-controller="CategoriesObsolete" asp-action="Index" class="btn btn-secondary">Categories</a>
+    <a asp-controller="Home" asp-action="Privacy" class="btn btn-secondary">Privacy</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Home</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m[0].Name)</th>
+            <th>@Html.DisplayNameFor(m => m[0].Description)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(_ => item.Name)</td>
+                <td>@Html.DisplayFor(_ => item.Description)</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline">
+                        <button type="submit" class="btn btn-link p-0">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3">Total: @Model.Count</td>
+        </tr>
+    </tfoot>
+</table>
+
+

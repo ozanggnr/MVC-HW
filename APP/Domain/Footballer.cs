@@ -32,5 +32,10 @@ namespace APP.Domain
         public string? Foot { get; set; }
 
         public bool IsInjured { get; set; }
+
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
+
+        public List<FootballerClub> FootballerClubs { get; set; } = new List<FootballerClub>();
     }
 }
