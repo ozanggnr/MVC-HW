@@ -1,9 +1,17 @@
-@model IEnumerable<APP.Models.FootballerResponse>
+﻿@model IEnumerable<FootballerResponse>
 
-@* Generated from Custom MVC Template (adapted for Footballers). *@
+@* Generated from Custom MVC Template. *@
+@* Model namespace using directive should be added to _ViewImports.cshtml. *@
 
 @{
-    var containerDivClass = "container";
+    var containerDivClass = "container"; // "container-fluid" can be used for full width
+}
+@{
+    /*
+    ViewBag and ViewData are the same collection (dictionary).
+    They carry extra data other than the model from a controller action to its view, or between views.
+    The value assigned will be shown in Views\Shared\_Layout.cshtml view's title tag of the head tag.
+    */
     ViewData["Title"] = "Footballer List";
 }
 
@@ -18,6 +26,9 @@
         <div class="@containerDivClass">
             <div class="row">
                 <div class="col-12 text-danger">
+                    @*
+                    TempData is used to carry extra data to the redirected controller action's view.
+                    *@
                     @TempData["Message"]
                 </div>
             </div>
@@ -32,34 +43,69 @@
             <table class="table table-striped table-hover">
                 <thead class="table-secondary">
                     <tr>
-                        <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                        <th>@Html.DisplayNameFor(model => model.BirthDateF)</th>
-                        <th>@Html.DisplayNameFor(model => model.Position)</th>
-                        <th>@Html.DisplayNameFor(model => model.ShirtNumberF)</th>
-                        <th>@Html.DisplayNameFor(model => model.IsInjuredF)</th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Surname)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Position)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ShirtNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateOfBirth)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.National)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Foot)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.IsInjured)
+                        </th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@Html.DisplayFor(_ => item.FullName)</td>
-                            <td>@Html.DisplayFor(_ => item.BirthDateF)</td>
-                            <td>@Html.DisplayFor(_ => item.Position)</td>
-                            <td>@Html.DisplayFor(_ => item.ShirtNumberF)</td>
-                            <td>@Html.DisplayFor(_ => item.IsInjuredF)</td>
-                            <td class="text-end w-25">
-                                <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
-                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;
-                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
-                        </tr>
-                    }
+		            @foreach (var item in Model) {
+				        <tr>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.Name)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.Surname)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.Position)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.ShirtNumber)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.DateOfBirth)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.National)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.Foot)
+					        </td>
+					        <td>
+						        @Html.DisplayFor(modelItem => item.IsInjured)
+					        </td>
+					        <td class="text-end w-25">
+						        <a asp-action="Details" asp-route-id="@item.Id">Details</a>&nbsp;|&nbsp;
+						        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>&nbsp;|&nbsp;
+						        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+					        </td>
+				        </tr>
+		            }
                 </tbody>
             </table>
         </div>
     </form>
 }
-
-

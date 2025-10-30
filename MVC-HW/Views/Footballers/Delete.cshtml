@@ -1,9 +1,17 @@
-@model APP.Models.FootballerResponse
+﻿@model FootballerResponse
 
-@* Generated from Custom MVC Template (adapted for Footballers). *@
+@* Generated from Custom MVC Template. *@
+@* Model namespace using directive should be added to _ViewImports.cshtml. *@
 
 @{
-    var containerDivClass = "container";
+    var containerDivClass = "container"; // "container-fluid" can be used for full width
+}
+@{
+    /*
+    ViewBag and ViewData are the same collection (dictionary).
+    They carry extra data other than the model from a controller action to its view, or between views.
+    The value assigned will be shown in Views\Shared\_Layout.cshtml view's title tag of the head tag.
+    */
     ViewData["Title"] = "Footballer Delete";
 }
 
@@ -17,31 +25,99 @@
 <div class="@containerDivClass">
     @if (TempData["Message"] is not null)
     {
-        <p class="text-danger">@TempData["Message"]</p>
+    /*
+    TempData is used to carry extra data to the redirected controller action's view.
+    */
+    <p class="text-danger">
+        @TempData["Message"]
+    </p>
     }
     <h3 class="text-danger">Are you sure you want to delete?</h3>
     <hr />
     <div class="row mb-3">
-        <div class="col-2 fw-bold">@Html.DisplayNameFor(m => m.FullName)</div>
-        <div class="col-10">@Html.DisplayFor(m => m.FullName)</div>
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.Name)
+        </div>
     </div>
     <div class="row mb-3">
-        <div class="col-2 fw-bold">@Html.DisplayNameFor(m => m.Position)</div>
-        <div class="col-10">@Html.DisplayFor(m => m.Position)</div>
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Surname)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.Surname)
+        </div>
     </div>
     <div class="row mb-3">
-        <div class="col-2 fw-bold">@Html.DisplayNameFor(m => m.BirthDateF)</div>
-        <div class="col-10">@Html.DisplayFor(m => m.BirthDateF)</div>
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Position)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.Position)
+        </div>
     </div>
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.ShirtNumber)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.ShirtNumber)
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.DateOfBirth)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.DateOfBirth)
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.National)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.National)
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.Foot)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.Foot)
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            @Html.DisplayNameFor(model => model.IsInjured)
+        </div>
+        <div class="col-10">
+            @Html.DisplayFor(model => model.IsInjured)
+        </div>
+    </div>
+
+@* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. 
+    Raw HTML Helper is used in case string parameter may have HTML tags. *@
+    @*
+    <div class="row mb-3">
+        <div class="col-2 fw-bold">
+            <b>@Html.DisplayNameFor(model => model.Entitys)</b>
+        </div>
+        <div class="col-10">
+            @Html.Raw(Model.Entitys)
+        </div>
+    </div>
+    *@
 
     <hr />
     <form asp-action="Delete">
-        @Html.AntiForgeryToken()
+	    @Html.AntiForgeryToken()
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Yes" class="btn btn-danger" />&nbsp;&nbsp;
         <a asp-action="Index" class="btn btn-outline-danger">No</a>
     </form>
 </div>
 }
-
-

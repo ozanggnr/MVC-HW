@@ -1,10 +1,18 @@
-@model APP.Models.FootballerRequest
+﻿@model FootballerRequest
 
-@* Generated from Custom MVC Template (adapted for Footballers). *@
+@* Generated from Custom MVC Template. *@
+@* Model namespace using directive should be added to _ViewImports.cshtml. *@
 
 @{
-    var containerDivClass = "container";
-    var dateTimePickerClass = "datetimepicker";
+    var containerDivClass = "container"; // "container-fluid" can be used for full width
+    var dateTimePickerClass = "datetimepicker"; // "jquery-datetimepicker" must be added as client side library
+}
+@{
+    /*
+    ViewBag and ViewData are the same collection (dictionary).
+    They carry extra data other than the model from a controller action to its view, or between views.
+    The value assigned will be shown in Views\Shared\_Layout.cshtml view's title tag of the head tag.
+    */
     ViewData["Title"] = "Footballer Create";
 }
 
@@ -16,99 +24,116 @@
 <div class="@containerDivClass">
     @if (TempData["Message"] is not null)
     {
-        <p class="text-danger">@TempData["Message"]</p>
+    /*
+    TempData is used to carry extra data to the redirected controller action's view.
+    */
+    <p class="text-danger">
+        @TempData["Message"]
+    </p>
     }
-    <form asp-action="Create" autocomplete="off">
-        @Html.AntiForgeryToken()
-        <div asp-validation-summary="All" class="text-danger"></div>
-
+    <form asp-action="Create" autocomplete="off" enctype="multipart/form-data">
+		@Html.AntiForgeryToken()
+        <div asp-validation-summary="All" class="text-danger"></div> @* Use ModelOnly instead of All to see only service response messages in validation summary *@
         <div class="row mb-3">
             <label asp-for="Name" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+			<div class="col-10">
+			    <input asp-for="Name" class="form-control" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
         </div>
-
         <div class="row mb-3">
             <label asp-for="Surname" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="Surname" class="form-control" />
-                <span asp-validation-for="Surname" class="text-danger"></span>
-            </div>
+			<div class="col-10">
+			    <input asp-for="Surname" class="form-control" />
+				<span asp-validation-for="Surname" class="text-danger"></span>
+			</div>
         </div>
-
-        <div class="row mb-3">
-            <label asp-for="DateOfBirth" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="DateOfBirth" class="form-control @dateTimePickerClass" type="text" />
-                <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-            </div>
-        </div>
-
         <div class="row mb-3">
             <label asp-for="Position" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="Position" class="form-control" />
-                <span asp-validation-for="Position" class="text-danger"></span>
-            </div>
+			<div class="col-10">
+			    <input asp-for="Position" class="form-control" />
+				<span asp-validation-for="Position" class="text-danger"></span>
+			</div>
         </div>
-
         <div class="row mb-3">
             <label asp-for="ShirtNumber" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="ShirtNumber" class="form-control" />
-                <span asp-validation-for="ShirtNumber" class="text-danger"></span>
-            </div>
+			<div class="col-10">
+			    <input asp-for="ShirtNumber" class="form-control" />
+				<span asp-validation-for="ShirtNumber" class="text-danger"></span>
+			</div>
         </div>
-
+        <div class="row mb-3">
+            <label asp-for="DateOfBirth" class="col-2 col-form-label fw-bold"></label>
+			<div class="col-10">
+				<input asp-for="DateOfBirth" class="form-control @dateTimePickerClass" type="text" />
+				<span asp-validation-for="DateOfBirth" class="text-danger"></span>
+			</div>
+        </div>
         <div class="row mb-3">
             <label asp-for="National" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="National" class="form-control" />
-                <span asp-validation-for="National" class="text-danger"></span>
-            </div>
+			<div class="col-10">
+			    <input asp-for="National" class="form-control" />
+				<span asp-validation-for="National" class="text-danger"></span>
+			</div>
         </div>
-
         <div class="row mb-3">
             <label asp-for="Foot" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10">
-                <input asp-for="Foot" class="form-control" />
-                <span asp-validation-for="Foot" class="text-danger"></span>
+			<div class="col-10">
+			    <input asp-for="Foot" class="form-control" />
+				<span asp-validation-for="Foot" class="text-danger"></span>
+			</div>
+        </div>
+        <div class="row mb-3">
+			<label asp-for="IsInjured" class="col-2 col-form-label fw-bold"></label>
+			<div class="col-10 pt-2">
+				<input class="form-check-input" asp-for="IsInjured" />
             </div>
         </div>
-
         <div class="row mb-3">
-            <label asp-for="IsInjured" class="col-2 col-form-label fw-bold"></label>
-            <div class="col-10 pt-2">
-                <input class="form-check-input" asp-for="IsInjured" />
-            </div>
+          
         </div>
 
-        <hr />
+@* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. *@
+        @*
         <div class="row mb-3">
-            <div class="offset-2 col-10">
+            <label asp-for="EntityIds" class="col-2 col-form-label fw-bold"></label>
+	        <div class="col-10">
+		        <select multiple asp-for="EntityIds" class="form-select" asp-items="ViewBag.EntityIds"></select>
+		        <span asp-validation-for="EntityIds" class="text-danger"></span>
+	        </div>
+        </div>
+        *@
+
+        <hr />  
+        <div class="row mb-3">
+			<div class="offset-2 col-10">
                 <button type="submit" class="btn btn-primary">Save</button>
-                &nbsp;&nbsp;
+				&nbsp;&nbsp;
                 <button type="reset" class="btn btn-outline-primary">Reset</button>
-                &nbsp;&nbsp;
-                <a asp-action="Index">Back to List</a>
-            </div>
+				&nbsp;&nbsp;
+				<a asp-action="Index">Back to List</a>
+			</div>
         </div>
     </form>
-</div>
+</div>  
 
 @section Scripts {
+    @* Can be uncommented to use client-side validation using jQuery instead of server-side validation. *@
+    @*<partial name="_ValidationScriptsPartial" />*@
+    
+    @* https://xdsoft.net/jqplugins/datetimepicker *@
     <link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
     <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
     <script>
         $(function () {
             $(".datetimepicker").datetimepicker({
+                // for using only date
                 timepicker: false,
                 format: 'm/d/Y'
+                // for using date with time
+                // timepicker: true,
+                // format: 'm/d/Y H:i'
             });
         });
     </script>
 }
-
-
