@@ -8,11 +8,6 @@
     var dateTimePickerClass = "datetimepicker"; // "jquery-datetimepicker" must be added as client side library
 }
 @{
-    /*
-    ViewBag and ViewData are the same collection (dictionary).
-    They carry extra data other than the model from a controller action to its view, or between views.
-    The value assigned will be shown in Views\Shared\_Layout.cshtml view's title tag of the head tag.
-    */
     ViewData["Title"] = "Footballer Create";
 }
 
@@ -92,18 +87,6 @@
         <div class="row mb-3">
           
         </div>
-
-@* Can be uncommented and used for many to many relationships, "entity" may be replaced with the related entity name in the controller and views. *@
-        @*
-        <div class="row mb-3">
-            <label asp-for="EntityIds" class="col-2 col-form-label fw-bold"></label>
-	        <div class="col-10">
-		        <select multiple asp-for="EntityIds" class="form-select" asp-items="ViewBag.EntityIds"></select>
-		        <span asp-validation-for="EntityIds" class="text-danger"></span>
-	        </div>
-        </div>
-        *@
-
         <hr />  
         <div class="row mb-3">
 			<div class="offset-2 col-10">
@@ -118,9 +101,6 @@
 </div>  
 
 @section Scripts {
-    @* Can be uncommented to use client-side validation using jQuery instead of server-side validation. *@
-    @*<partial name="_ValidationScriptsPartial" />*@
-    
     @* https://xdsoft.net/jqplugins/datetimepicker *@
     <link href="~/lib/jquery-datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
     <script src="~/lib/jquery-datetimepicker/jquery.datetimepicker.full.min.js"></script>
